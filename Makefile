@@ -8,9 +8,9 @@ all: clean ${DISTDIR}/${PROGROOT}.so
 ${DISTDIR}/${PROGROOT}_go.a: ${PROGROOT}.go
 	go build -buildmode=c-archive -o $@ $?
 
-${DISTDIR}/redismodule.h: ~/depos/redis/redis/src/redismodule.h
+${DISTDIR}/redismodule.h:
 	@mkdir -p ${DISTDIR}
-	@cp $? $@
+	@wget -q -O $@ https://raw.githubusercontent.com/RedisLabs/RedisModulesSDK/master/redismodule.h
 
 ${DISTDIR}/${PROGROOT}_go.h: ${PROGROOT}.go
 	go build -buildmode=c-shared -o ${DISTDIR}/${PROGROOT}_go.so $?

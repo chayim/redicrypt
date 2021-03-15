@@ -4,3 +4,4 @@
 *.so
 *_go.h
 redismodule.h
+*.o
