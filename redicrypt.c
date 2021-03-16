@@ -3,14 +3,14 @@
 #include "dist/redicrypt_go.h"
 #include "dist/redismodule.h"
 
-int HEncSetCommand(RedisModuleCtx *ctx, RedisModuleString **argv, int argc) {
+int SetEncCommand(RedisModuleCtx *ctx, RedisModuleString **argv, int argc) {
     if (argc != 3) return RedisModule_WrongArity(ctx);
     RedisModule_AutoMemory(ctx);
 
     size_t s;
     const char *str = RedisModule_StringPtrLen(argv[2], &s);
 
-    const char *res = HEncSet(getenv("REDICRYPT_KEY"), str);
+    const char *res = SetEnc(getenv("REDICRYPT_KEY"), str);
 
     RedisModuleString *ciphered = RedisModule_CreateString(ctx, res, strlen(res));
     RedisModuleCallReply *srep = RedisModule_Call(ctx, "SET", "ss", argv[1], ciphered);
@@ -21,7 +21,7 @@ int HEncSetCommand(RedisModuleCtx *ctx, RedisModuleString **argv, int argc) {
     return REDISMODULE_OK;
 }
 
-int HDecGetCommand(RedisModuleCtx *ctx, RedisModuleString **argv, int argc) {
+int GetDecCommand(RedisModuleCtx *ctx, RedisModuleString **argv, int argc) {
 
     if (argc != 2) return RedisModule_WrongArity(ctx);
     RedisModule_AutoMemory(ctx);
@@ -33,7 +33,7 @@ int HDecGetCommand(RedisModuleCtx *ctx, RedisModuleString **argv, int argc) {
     size_t len;
     char *ptr = RedisModule_CallReplyStringPtr(reply,&len);
 
-    const char *res = HDecGet(getenv("REDICRYPT_KEY"), ptr);
+    const char *res = GetDec(getenv("REDICRYPT_KEY"), ptr);
     RedisModuleString *decrypted = RedisModule_CreateString(ctx, res, strlen(res));
 
     RedisModule_ReplyWithString(ctx, decrypted);
@@ -45,13 +45,13 @@ int RedisModule_OnLoad(RedisModuleCtx *ctx, RedisModuleString **argv, int argc) 
     if (RedisModule_Init(ctx,"redicrypt",1,REDISMODULE_APIVER_1)
         == REDISMODULE_ERR) return REDISMODULE_ERR;
 
-    if (RedisModule_CreateCommand(ctx,"HENCSET",
-        HEncSetCommand, "write",
+    if (RedisModule_CreateCommand(ctx,"SETENC",
+        SetEncCommand, "write",
         0, 0, 0) == REDISMODULE_ERR)
         return REDISMODULE_ERR;
 
-    if (RedisModule_CreateCommand(ctx,"HDECGET",
-        HDecGetCommand, "readonly",
+    if (RedisModule_CreateCommand(ctx,"GETDEC",
+        GetDecCommand, "readonly",
         0, 0, 0) == REDISMODULE_ERR)
         return REDISMODULE_ERR;
 

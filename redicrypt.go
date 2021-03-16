@@ -10,8 +10,8 @@ import (
 	"io"
 )
 
-//export HEncSet
-func HEncSet(encKey *C.char, value *C.char) *C.char {
+//export SetEnc
+func SetEnc(encKey *C.char, value *C.char) *C.char {
 	secret := []byte(C.GoString(encKey))
 	plaintext := []byte(C.GoString(value))
 
@@ -32,8 +32,8 @@ func HEncSet(encKey *C.char, value *C.char) *C.char {
 	return C.CString(cstr)
 }
 
-//export HDecGet
-func HDecGet(encKey *C.char, value *C.char) *C.char {
+//export GetDec
+func GetDec(encKey *C.char, value *C.char) *C.char {
 
 	secret := []byte(C.GoString(encKey))
 	encryptedText := C.GoString(value)
