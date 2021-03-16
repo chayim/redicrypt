@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "dist/redicrypt_go.h"
-#include "dist/redismodule.h"
+#include "deps/redismodule.h"
 
 int SetEncCommand(RedisModuleCtx *ctx, RedisModuleString **argv, int argc) {
     if (argc != 3) return RedisModule_WrongArity(ctx);
@@ -10,7 +10,7 @@ int SetEncCommand(RedisModuleCtx *ctx, RedisModuleString **argv, int argc) {
     size_t s;
     const char *str = RedisModule_StringPtrLen(argv[2], &s);
 
-    const char *res = SetEnc(getenv("REDICRYPT_KEY"), str);
+    const char *res = Encrypt(getenv("REDICRYPT_KEY"), str);
 
     RedisModuleString *ciphered = RedisModule_CreateString(ctx, res, strlen(res));
     RedisModuleCallReply *srep = RedisModule_Call(ctx, "SET", "ss", argv[1], ciphered);
@@ -33,7 +33,7 @@ int GetDecCommand(RedisModuleCtx *ctx, RedisModuleString **argv, int argc) {
     size_t len;
     char *ptr = RedisModule_CallReplyStringPtr(reply,&len);
 
-    const char *res = GetDec(getenv("REDICRYPT_KEY"), ptr);
+    const char *res = Decrypt(getenv("REDICRYPT_KEY"), ptr);
     RedisModuleString *decrypted = RedisModule_CreateString(ctx, res, strlen(res));
 
     RedisModule_ReplyWithString(ctx, decrypted);

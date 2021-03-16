@@ -21,13 +21,17 @@ It does this by introducing two new redis commands, one for storing an encrypted
 
 ### Dependencies
 
-Building this module depends on [go 1.14](https://www.golang.org), [gcc 8](https://www.gnu.org/software/gcc) and [make 3.0 or higher](https://www.gnu.org/software/make). 
+Building this module depends on [go 1.14](https://www.golang.org), [gcc 8](https://www.gnu.org/software/gcc) and [make 3.0 or higher](https://www.gnu.org/software/make). You also need a copy of wget on your system, so that the latest copy of the [redis modules sdk](https://raw.githubusercontent.com/redis/redis/unstable/src/redismodule.h) can be downloaded.
 
 ## Building
 
 1. Clone the repo.
 
 2. Run *make*
+
+### Why it works this way
+
+Redicrypt started as a random project with the goal of building a redis module, using go. It uses the go compiler to generate a header file, and static archive. The header file is used by the [redismodule wrapper](redicrypt.c) which in turns calls the go code for all encryption and decryption. The static archive is combined with the object built from the wrapper, into a shared object, which redis loads. For more information [read the Makefile](Makefile).
 
 ## Usage
 

@@ -10,8 +10,8 @@ import (
 	"io"
 )
 
-//export SetEnc
-func SetEnc(encKey *C.char, value *C.char) *C.char {
+//export Encrypt
+func Encrypt(encKey *C.char, value *C.char) *C.char {
 	secret := []byte(C.GoString(encKey))
 	plaintext := []byte(C.GoString(value))
 
@@ -32,8 +32,8 @@ func SetEnc(encKey *C.char, value *C.char) *C.char {
 	return C.CString(cstr)
 }
 
-//export GetDec
-func GetDec(encKey *C.char, value *C.char) *C.char {
+//export Decrypt
+func Decrypt(encKey *C.char, value *C.char) *C.char {
 
 	secret := []byte(C.GoString(encKey))
 	encryptedText := C.GoString(value)

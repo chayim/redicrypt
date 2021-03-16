@@ -5,17 +5,17 @@ PROGROOT=redicrypt
 
 all: clean ${DISTDIR}/${PROGROOT}.so
 
+deps/redismodule.h:
+	@mkdir deps
+	@wget -q -O $@ https://raw.githubusercontent.com/redis/redis/unstable/src/redismodule.h
+
 ${DISTDIR}/${PROGROOT}_go.a: ${PROGROOT}.go
 	go build -buildmode=c-archive -o $@ $?
-
-${DISTDIR}/redismodule.h:
-	@mkdir -p ${DISTDIR}
-	@wget -q -O $@ https://raw.githubusercontent.com/RedisLabs/RedisModulesSDK/master/redismodule.h
 
 ${DISTDIR}/${PROGROOT}_go.h: ${PROGROOT}.go
 	go build -buildmode=c-shared -o ${DISTDIR}/${PROGROOT}_go.so $?
 
-${DISTDIR}/${PROGROOT}.o: ${PROGROOT}.c ${DISTDIR}/${PROGROOT}_go.h ${DISTDIR}/redismodule.h
+${DISTDIR}/${PROGROOT}.o: ${PROGROOT}.c ${DISTDIR}/${PROGROOT}_go.h deps/redismodule.h
 	gcc -fPIC -std=gnu99 -c -static -o $@ $<
 
 ${DISTDIR}/${PROGROOT}.so: ${DISTDIR}/${PROGROOT}_go.a ${DISTDIR}/${PROGROOT}.o
