@@ -1,8 +1,4 @@
-# Redicrypt
-
-## Encrypted data storage and retrieval for Redis
-
-<img src="https://oss.redislabs.com/redisearch/img/logo.svg" alt="logo" width="300"/>
+# Redicrypt - Encrypted data storage and retrieval for Redis
 
 ## Overview
 
