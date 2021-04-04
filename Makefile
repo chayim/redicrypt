@@ -16,10 +16,13 @@ ${DISTDIR}/${PROGROOT}_go.h: ${PROGROOT}.go
 	go build -buildmode=c-shared -o ${DISTDIR}/${PROGROOT}_go.so $?
 
 ${DISTDIR}/${PROGROOT}.o: ${PROGROOT}.c ${DISTDIR}/${PROGROOT}_go.h deps/redismodule.h
-	gcc -fPIC -std=gnu99 -c -static -o $@ $<
+	gcc -w -fPIC -std=gnu99 -c -static -o $@ $<
 
 ${DISTDIR}/${PROGROOT}.so: ${DISTDIR}/${PROGROOT}_go.a ${DISTDIR}/${PROGROOT}.o
-	gcc -shared -Bsymbolic -lc -lffi -nostdlib -o $@ -Wl,--whole-archive $?
+	gcc -w -shared -Bsymbolic -lc -lffi -nostdlib -o $@ -Wl,--whole-archive $?
 
 clean:
 	rm -rf ${DISTDIR}
+
+docker:: ${DISTDIR}/${PROGROOT}.so
+	docker build .
