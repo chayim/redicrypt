@@ -6,14 +6,45 @@ Redicrypt stores strings, encrypted, in redis. Encryption takes place on the red
 
 It does this by introducing two new redis commands, one for storing an encrypted key value, and one for retrieving the decrypted value of the key. Key names are stored in plaintext, and only their values are decrypted.
 
-* SETENC - Sets a key to an encrypted value
-    - eg: SETENC *somekey* *myvalue*
+* RC.SETENC - Sets a key to an encrypted value
+    - eg: RC.SETENC *somekey* *myvalue*
 
-* GETDEC - Gets the decrypted value of a key
-    - eg: GETDEC *somekey*
+* RC.GETENC - Gets the decrypted value of a key
+    - eg: RC.GETENC *somekey*
 
-* RECRYPT - Fetches a key, decrypts it, and re-encrypts it with our new key:
-    - eg: RECRYPT *somekey*
+* RC.BSETENC - Base64encode a key, storing the encrypted value
+    - eg: RC.BSETENC *somekey* *myvalue*
+
+* RC.BGETENC - Return the decrypted value of a base64encoded key
+    - eg: RC.BGETENC *somekey*
+
+* RC.RECRYPT - Fetches a key, decrypts it, and re-encrypts it with our new key:
+    - eg: RC.RECRYPT *somekey*
+
+* RC.SETHASH - Sets a key to a hashed value. The first argument is the hash type.
+    - eg: RC.SETHASH *sha224* *somekey* *myvalue*
+
+* RC.SETB64 - Set a key to the bsae64 encoded value of the specified string.
+    - eg: RC.SETB64 *somekey* *myvalue*
+
+* RC.GETB64 - Get the plaintext value of a base64 encoded redis key.
+    - eg: RC.GETB64 *somekey*
+
+* RC.SETHASH - Sets a key to a hashed value. The first argument is the hash type.
+    - eg: RC.SETHASH *sha224* *somekey* *myvalue*
+
+### Supported Hashtypes
+
+The following are the supported hashtypes to use with SETHASH. An unsupported type will return a blank string.
+
+1. sha1
+1. sha224
+1. sha256
+1. sha3-224
+1. sha3-256
+1. sha3-384
+1. sha3-512
+1. whirlpool
 
 ## Usage
 

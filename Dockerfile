@@ -18,4 +18,4 @@ FROM redis:6.2 as runner
 ARG REDICRYPT_KEY=default
 ENV REDICRYPT_KEY ${REDICRYPT_KEY}
 COPY --from=builder /build/dist/redicrypt.so /usr/local/lib/redicrypt.so
-ENTRYPOINT REDICRYPT_KEY=${REDICRYPT_KEY} /usr/local/bin/redis-server  --load-module  /usr/local/lib/redicrypt.so
+ENTRYPOINT REDICRYPT_KEY=${REDICRYPT_KEY} /usr/local/bin/redis-server  --loadmodule  /usr/local/lib/redicrypt.so
