@@ -24,14 +24,11 @@ It does this by introducing two new redis commands, one for storing an encrypted
 * RC.SETHASH - Sets a key to a hashed value. The first argument is the hash type.
     - eg: RC.SETHASH *sha224* *somekey* *myvalue*
 
-* RC.SETB64 - Set a key to the bsae64 encoded value of the specified string.
+* RC.SETB64 - Set a key to the base64 encoded value of the specified string.
     - eg: RC.SETB64 *somekey* *myvalue*
 
 * RC.GETB64 - Get the plaintext value of a base64 encoded redis key.
     - eg: RC.GETB64 *somekey*
-
-* RC.SETHASH - Sets a key to a hashed value. The first argument is the hash type.
-    - eg: RC.SETHASH *sha224* *somekey* *myvalue*
 
 ### Supported Hashtypes
 
@@ -43,7 +40,10 @@ The following are the supported hashtypes to use with SETHASH. An unsupported ty
 1. sha3-224
 1. sha3-256
 1. sha3-384
-1. sha3-512
+1. blake2b-256
+1. blake2s-256
+1. blake2s-384
+1. blake2s-512
 1. whirlpool
 
 ## Usage
@@ -61,6 +61,8 @@ REDICRYPT_KEY=12345678901234567890123456789012 redis-server
 ```
 OLD_REDICRYPT_KEY=00000000000000000000000000000000 REDICRYPT_KEY=12345678901234567890123456789012 redis-server
 ```
+
+You can also use the [python client](https://github.com/chayim/redicrypt-py).
 
 ----------------------
 

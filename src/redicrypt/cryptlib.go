@@ -8,6 +8,8 @@ import (
 	"crypto/sha256"
 	"encoding/base64"
 	"github.com/jzelinskie/whirlpool"
+	"golang.org/x/crypto/blake2b"
+	"golang.org/x/crypto/blake2s"
 	"golang.org/x/crypto/sha3"
 	"io"
 )
@@ -42,6 +44,22 @@ func Hash(hashName string, hashVal []byte) string {
 
 	case hashName == "sha3-512":
 		hv := sha3.Sum512(hashVal)
+		return B64Encode(hv[:])
+
+	case hashName == "blake2s-256":
+		hv := blake2s.Sum256(hashVal)
+		return B64Encode(hv[:])
+
+	case hashName == "blake2b-256":
+		hv := blake2b.Sum256(hashVal)
+		return B64Encode(hv[:])
+
+	case hashName == "blake2b-384":
+		hv := blake2b.Sum384(hashVal)
+		return B64Encode(hv[:])
+
+	case hashName == "blake2b-512":
+		hv := blake2b.Sum512(hashVal)
 		return B64Encode(hv[:])
 
 	case hashName == "whirlpool":
