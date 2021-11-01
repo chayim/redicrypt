@@ -48,7 +48,7 @@ The following are the supported hashtypes to use with SETHASH. An unsupported ty
 
 ## Usage
 
-These examples assume that redicrypt is loaded into redis, for detailed instructions [read this](https://redis.io/topics/modules-intro#loading-modules).
+These examples assume that redicrypt is loaded into redis, for detailed instructions [read this](https://redis.io/topics/modules-intro#loading-modules).  If you use python, you might want to install the library [rediscrypt-py](https://github.com/chayim/redicrypt-py).
 
 1. *Encryption* - Set the **REDICRYPT_KEY** environment variable, to the 32-character key/passphrase you want to use for encrypting your data as per the example below. Please do not use the sample key below!
 
