@@ -1,6 +1,6 @@
-FROM redis:6.2.4 as builder
+FROM redis:6.2.6 as builder
 
-ARG GO_VER=1.16.3
+ARG GO_VER=1.17.3
 
 ADD ./ /build
 RUN apt update -qq && apt-get install -qqy build-essential wget libffi-dev
@@ -14,7 +14,7 @@ RUN make all
 
 # -------------------------------------------------------- #
 
-FROM redis:6.2.4 as runner
+FROM redis:6.2.6 as runner
 ARG REDICRYPT_KEY=default
 ENV REDICRYPT_KEY ${REDICRYPT_KEY}
 COPY --from=builder /build/dist/redicrypt.so /usr/local/lib/redicrypt.so
