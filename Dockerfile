@@ -1,4 +1,4 @@
-FROM redis:6.2.6 as builder
+FROM redis:7.0-rc3 as builder
 
 ARG GO_VER=1.17.3
 
@@ -14,7 +14,7 @@ RUN make all
 
 # -------------------------------------------------------- #
 
-FROM redis:6.2.6 as runner
+FROM redis:7.0-rc3 as runner
 ARG REDICRYPT_KEY=default
 ENV REDICRYPT_KEY ${REDICRYPT_KEY}
 COPY --from=builder /build/dist/redicrypt.so /usr/local/lib/redicrypt.so

@@ -1,6 +1,6 @@
 module github.com/chayim/redicrypt
 
-go 1.16
+go 1.17
 
 require (
 	github.com/jzelinskie/whirlpool v0.0.0-20201016144138-0675e54bb004 // indirect
