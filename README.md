@@ -30,6 +30,12 @@ It does this by introducing two new redis commands, one for storing an encrypted
 * RC.GETB64 - Get the plaintext value of a base64 encoded redis key.
     - eg: RC.GETB64 *somekey*
 
+* RC.KEYGEN - Generate and store an encyrption key of length *bits*, without disclosing it to the user.
+    - eg: RC.KEYGEN 32
+
+* RC.SETKEY - Change the encryption key on the redis instance.
+    - eg: RC.SETKEY myencryptionkey
+
 ### Supported Hashtypes
 
 The following are the supported hashtypes to use with SETHASH. An unsupported type will return a blank string.

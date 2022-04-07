@@ -93,6 +93,35 @@ int SetEncCommand(RedisModuleCtx *ctx, RedisModuleString **argv, int argc) {
     return REDISMODULE_OK;
 }
 
+/* Generate a new encrytion key, on the back end */
+int GenerateKeyCommand(RedisModuleCtx *ctx, RedisModuleString **argv, int argc) {
+    RedisModule_AutoMemory(ctx);
+
+    size_t s;
+    const char *bits = RedisModule_StringPtrLen(argv[1], &s);
+    int ibits = atoi(bits);
+    if (ibits == 0) {
+      return REDISMODULE_ERR;
+    }
+
+    GenerateKey(ibits);
+    RedisModule_ReplyWithSimpleString(ctx, "OK");
+    return REDISMODULE_OK;
+}
+
+/* Give the server a specific encryption key to use */
+int SetKeyCommand(RedisModuleCtx *ctx, RedisModuleString **argv, int argc) {
+    if (argc != 2) return RedisModule_WrongArity(ctx);
+    RedisModule_AutoMemory(ctx);
+
+    size_t s;
+    const char *key = RedisModule_StringPtrLen(argv[1], &s);
+
+    SetKey(key);
+    RedisModule_ReplyWithSimpleString(ctx, "OK");
+    return REDISMODULE_OK;
+}
+
 /* Set a value, hashed
  * [1] = Hash Type
  * [2] = Redis key to set
@@ -192,6 +221,16 @@ int RedisModule_OnLoad(RedisModuleCtx *ctx, RedisModuleString **argv, int argc) 
 
     if (RedisModule_CreateCommand(ctx,"RC.SETENC",
         SetEncCommand, "write",
+        0, 0, 0) == REDISMODULE_ERR)
+        return REDISMODULE_ERR;
+
+    if (RedisModule_CreateCommand(ctx,"RC.KEYGEN",
+        GenerateKeyCommand, "write",
+        0, 0, 0) == REDISMODULE_ERR)
+        return REDISMODULE_ERR;
+
+    if (RedisModule_CreateCommand(ctx,"RC.SETKEY",
+        SetKeyCommand, "write",
         0, 0, 0) == REDISMODULE_ERR)
         return REDISMODULE_ERR;
 
