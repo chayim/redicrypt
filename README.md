@@ -4,7 +4,7 @@
 
 Redicrypt stores strings, encrypted, in redis. Encryption takes place on the redis server, meaning redis can [be configured with TLS](https://redis.io/topics/encryption), and then data at rest, will be stored encrypted. Data is encrypted using 256-bit AES, and then stored base64 encoded.
 
-It does this by introducing two new redis commands, one for storing an encrypted key value, and one for retrieving the decrypted value of the key. Key names are stored in plaintext, and only their values are decrypted.
+It does this by introducing two new redis commands, one for storing an encrypted key value, and one for retrieving the decrypted value of the key. Key names are stored in plaintext, and only their values are decrypted. There is also [python support](https://github.com/chayim/redicrypt-py) available.
 
 * RC.SETENC - Sets a key to an encrypted value
     - eg: RC.SETENC *somekey* *myvalue*
