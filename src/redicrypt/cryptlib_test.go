@@ -73,6 +73,20 @@ func TestHashing(t *testing.T) {
 		t.Errorf("received %s instead of %s", sha3512, expected)
 	}
 
+	// sha512-224
+	sha512224 := Hash("sha512-224", phrase)
+	expected = "LYzdr3ded2-W8-KFNUuPsLS-99j60bfGIo_8yw=="
+	if expected != sha512224 {
+		t.Errorf("received %s instead of %s", sha512224, expected)
+	}
+
+	// sha512-256
+	sha512256 := Hash("sha512-256", phrase)
+	expected = "U9B4gMIwdtFVUOMK_FuRGcfyccN3ru8_41xFvk0iyM8="
+	if expected != sha512256 {
+		t.Errorf("received %s instead of %s", sha512256, expected)
+	}
+
 	// blake3s-256
 	blake3s256 := Hash("blake2s-256", phrase)
 	expected = "rP1TU5-14M6TC1WSE9uHpCfLJpM_GlS-Xevwl0WZYtI="

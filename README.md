@@ -46,6 +46,9 @@ The following are the supported hashtypes to use with SETHASH. An unsupported ty
 1. sha3-224
 1. sha3-256
 1. sha3-384
+1. sha3-512
+1. sha512_224
+1. sha512_256
 1. blake2b-256
 1. blake2s-256
 1. blake2s-384

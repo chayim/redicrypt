@@ -6,12 +6,14 @@ import (
 	"crypto/rand"
 	"crypto/sha1"
 	"crypto/sha256"
+	"crypto/sha512"
 	"encoding/base64"
+	"io"
+
 	"github.com/jzelinskie/whirlpool"
 	"golang.org/x/crypto/blake2b"
 	"golang.org/x/crypto/blake2s"
 	"golang.org/x/crypto/sha3"
-	"io"
 )
 
 // Wrapper for hashing functions, returns base64encoded hashes
@@ -44,6 +46,14 @@ func Hash(hashName string, hashVal []byte) string {
 
 	case hashName == "sha3-512":
 		hv := sha3.Sum512(hashVal)
+		return B64Encode(hv[:])
+
+	case hashName == "sha512-224":
+		hv := sha512.Sum512_224(hashVal)
+		return B64Encode(hv[:])
+
+	case hashName == "sha512-256":
+		hv := sha512.Sum512_256(hashVal)
 		return B64Encode(hv[:])
 
 	case hashName == "blake2s-256":
