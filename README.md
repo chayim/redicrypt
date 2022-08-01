@@ -53,6 +53,8 @@ The following are the supported hashtypes to use with SETHASH. An unsupported ty
 1. blake2s-256
 1. blake2s-384
 1. blake2s-512
+1. blake3-256
+1. blake3-512
 1. whirlpool
 
 ## Usage
