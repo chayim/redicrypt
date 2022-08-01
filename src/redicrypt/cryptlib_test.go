@@ -87,32 +87,46 @@ func TestHashing(t *testing.T) {
 		t.Errorf("received %s instead of %s", sha512256, expected)
 	}
 
-	// blake3s-256
-	blake3s256 := Hash("blake2s-256", phrase)
+	// blake2s-256
+	blake2s256 := Hash("blake2s-256", phrase)
 	expected = "rP1TU5-14M6TC1WSE9uHpCfLJpM_GlS-Xevwl0WZYtI="
-	if expected != blake3s256 {
-		t.Errorf("received %s instead of %s", blake3s256, expected)
+	if expected != blake2s256 {
+		t.Errorf("received %s instead of %s", blake2s256, expected)
 	}
 
-	// blake3b-256
-	blake3b256 := Hash("blake2b-256", phrase)
+	// blake2b-256
+	blake2b256 := Hash("blake2b-256", phrase)
 	expected = "bmmce1rHuCyz_aqTPuIpLMfe0LV0DAwPYGkExSugKHQ="
-	if expected != blake3b256 {
-		t.Errorf("received %s instead of %s", blake3b256, expected)
+	if expected != blake2b256 {
+		t.Errorf("received %s instead of %s", blake2b256, expected)
 	}
 
-	// blake3b-384
-	blake3b384 := Hash("blake2b-384", phrase)
+	// blake2b-384
+	blake2b384 := Hash("blake2b-384", phrase)
 	expected = "LhT_TcaGAXgCVPUMzjoCKuUYXhz9r3SUYS5VNIT_Dmiqcaq7yKJgN7D0WllzbGYq"
-	if expected != blake3b384 {
-		t.Errorf("received %s instead of %s", blake3b384, expected)
+	if expected != blake2b384 {
+		t.Errorf("received %s instead of %s", blake2b384, expected)
 	}
 
-	// blake3b-512
-	blake3b512 := Hash("blake2b-512", phrase)
+	// blake2b-512
+	blake2b512 := Hash("blake2b-512", phrase)
 	expected = "6lvBMu_bOviGDzOGZWv1_yWaWJsEItvEpS9hOoROkd0-EAmZu00_N6cEOsRfxhkjRCzfRboRLRYZVLz9rokx2w=="
-	if expected != blake3b512 {
-		t.Errorf("received %s instead of %s", blake3b512, expected)
+	if expected != blake2b512 {
+		t.Errorf("received %s instead of %s", blake2b512, expected)
+	}
+
+	// blake3-256
+	blake3256 := Hash("blake3-256", phrase)
+	expected = "VmlSQtBhaFTut67AfgnpdbF5U_djohhVvqxYgF5Li1o="
+	if expected != blake3256 {
+		t.Errorf("received %s instead of %s", blake3256, expected)
+	}
+
+	// blake3-512
+	blake3512 := Hash("blake3-512", phrase)
+	expected = "VmlSQtBhaFTut67AfgnpdbF5U_djohhVvqxYgF5Li1ofqSzVvqc7geX-vCd7FbfccAsT01LNgRn41GDR-iCr_w=="
+	if expected != blake3512 {
+		t.Errorf("received %s instead of %s", blake3512, expected)
 	}
 
 	// whirlpool

@@ -14,6 +14,7 @@ import (
 	"golang.org/x/crypto/blake2b"
 	"golang.org/x/crypto/blake2s"
 	"golang.org/x/crypto/sha3"
+	"lukechampine.com/blake3"
 )
 
 // Wrapper for hashing functions, returns base64encoded hashes
@@ -70,6 +71,14 @@ func Hash(hashName string, hashVal []byte) string {
 
 	case hashName == "blake2b-512":
 		hv := blake2b.Sum512(hashVal)
+		return B64Encode(hv[:])
+
+	case hashName == "blake3-256":
+		hv := blake3.Sum256(hashVal)
+		return B64Encode(hv[:])
+
+	case hashName == "blake3-512":
+		hv := blake3.Sum512(hashVal)
 		return B64Encode(hv[:])
 
 	case hashName == "whirlpool":
