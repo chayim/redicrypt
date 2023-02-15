@@ -1,5 +1,9 @@
 # Redicrypt - Encrypted data storage and retrieval for Redis
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/chayim/redicrypt)](https://goreportcard.com/report/github.com/chayim/redicrypt)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![CI](https://github.com/chayim/redicrypt/actions/workflows/ci.yml/badge.svg)](https://github.com/chayim/redicrypt/actions/workflows/ci.yml)
+
 ## Overview
 
 Redicrypt stores strings, encrypted, in redis. Encryption takes place on the redis server, meaning redis can [be configured with TLS](https://redis.io/topics/encryption), and then data at rest, will be stored encrypted. Data is encrypted using 256-bit AES, and then stored base64 encoded.
