@@ -91,7 +91,7 @@ Redicrypt started as a random project with the goal of building a redis module, 
 
 ### Dependencies
 
-Building this module depends on [go 1.14](https://www.golang.org), [gcc 8](https://www.gnu.org/software/gcc) and [make 3.0 or higher](https://www.gnu.org/software/make). You also need a copy of wget on your system, so that the latest copy of the [redis modules sdk](https://raw.githubusercontent.com/redis/redis/unstable/src/redismodule.h) can be downloaded. You can also just build from the included docker file with *docker build .*
+Building this module depends on [go 1.19](https://www.golang.org), [gcc 8](https://www.gnu.org/software/gcc) and [make 3.0 or higher](https://www.gnu.org/software/make). You also need a copy of wget on your system, so that the latest copy of the [redis modules sdk](https://raw.githubusercontent.com/redis/redis/unstable/src/redismodule.h) can be downloaded. You can also just build from the included docker file with *docker build .*
 
 ### Building
 
